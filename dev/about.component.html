@@ -1,0 +1,95 @@
+<html lang="en">
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <my-station-query (stationListCreated)="stationList=$event"></my-station-query>
+                    <li><a>How to set up this app</a></li>
+                    <li><a>Back-End Structure</a></li>
+                    <li><a>Front-End Structure</a></li>
+                    <li><a>Future Developments</a></li>
+                    <li><a>Known Bugs</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h2 class="page-header">How to set up this app:</h2>
+                <h4>Back-End</h4>
+                <ol>
+                    <li>All the back-end parts are in a virtual machine named BARTPROJECT, and the computuer is named dyangbart</li>
+                    <li>Open BARTProject_DY (the SLN file) in Visual Studio and run it</li>
+                    <li>Open PI Interface Configuration Utility and run the UFL interface, using the BART API.ini file</li>
+                    <li>To check, the attributes of the stations should be updating in PI System Explorer (the asset server is DYANG6220 and database is BART)</li>
+                </ol>
+                <h4>Front-End</h4>
+                <ol>
+                    <li>Have the project folder, BART Web App, in C:/</li>
+                    <li>If it's your first time running the web app on your machine, install Node.js from https://nodejs.org/en/download/</li>
+                    <li>To start the web app, type "cd /d C:\BART Web App" into command prompt</li>
+                    <li>If it's your first time running the web app on your machine, type "npm install"</li>
+                    <li>After, type "npm start"</li>
+                    <li>Skip steps 2 and 4 if you want to run this program again</li>
+                </ol>
+                <br>
+                <br>
+                <h2 class="page-header">Back-End Structure:</h2>
+                <p>A flowchart of the backend structure is shown below:</p>
+                <img src="../assets/img/backend-structure.png">
+                <ol>
+                    <li>Using a console application, queries are sent to the BART API every few seconds to retrieve the estimated
+                        arrival time and the number of cars and packages it in a .txt file.</li>
+                    <li>The .txt files are stored in a folder and the UFL interface scans the folder every five seconds and parses
+                        the information to store it into PI.</li>
+                    <li>The PI Points are organized based on train and line using the Asset Framework.</li>
+                    <li>PI Web API is linked with the server to make retrieving the desired information more manageable.</li>
+                </ol>
+                <br>
+                <br>
+                <h2 class="page-header">Front-End Structure:</h2>
+                <p>A flowchart of the frontend structure, located in the BART Web App/dev folder, is shown below:</p>
+                <img src="../assets/img/frontend-structure.png">
+                <br>
+                <ul>
+                    <li>view.component.ts is in charge of routing the web app and the about page</li>
+                    <li>about.component.ts is responsible for loading this page</li>
+                    <li>about.component.html is responsible for displaying the contents of this page</li>
+                    <li>app.component.ts is responsible for loading the web app</li>
+                    <li>app.component.html is responsible for displaying the contents of the web app</li>
+                    <li>data-query.component.ts is responsible for querying and retrieving the data in the sidebar</li>
+                    <li>table-query.component.ts is responsible for querying and retrieving the data in the table</li>
+                    <li>station-query.component.ts is responsible for querying and retrieving the station names and destinations in the server</li>
+                    <li>form.component.ts is responsible for loading and displaying the form in the sidebar</li>
+                    <li>image.component.ts is responsible for loading the images in the dashboard</li>
+                    <li>map.component.ts is responsible for querying the Google Maps API to load the map</li>
+                    <li>station.ts is responsible for declaring the station class</li>
+                    <li>boot.ts is responsible for bootstrapping</li>
+                </ul>
+                <br>
+                <br>
+                <h2 class="page-header">Future Developments:</h2>
+                <ul>
+                    <li>Make the sidebar of this page clickable</li>
+                    <li>Have the web app constantly search the PI Web API for updated times</li>
+                    <li>Incorporate a notification system using PI Notifications to let the user know when to leave the office</li>
+                    <li>Use the Google Maps API to find the time requierd to get to the station</li>
+                    <li>Run the back-end console application as a service</li>
+                    <li>Make front-end an acutal application that you can install on a computer</li>
+                    <li>"Fix" the Submit button such that it can be clicked multiple times if a new station is selected</li>
+                    <li>Decrease the loading time</li>
+                </ul>
+                <br>
+                <br>
+                <h2 class="page-header">Known Bugs:</h2>
+                <ul>
+                    <li>Occasionally, if you select the station but don't change the destination and click submit, there is an error probably because of the asynchrous querying of the PI Web API</li>
+                    <li>Occasionally, the Google Maps display does not work</li>
+                </ul>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

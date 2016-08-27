@@ -1,0 +1,42 @@
+<html lang="en">
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <my-station-query (stationListCreated)="stationList=$event"></my-station-query>
+                    <li>
+                        <a>
+                            <my-form [stations]="stationList" (showImagetoApp)="hideImageApp=$event" (selectedStationtoApp)="imageStation=$event" (selectedStationLatitudetoApp)="imageStationLatitude=$event"
+                                (selectedStationLongitudetoApp)="imageStationLongitude=$event" (selectedStationDestinationstoApp)="selectedStationDestinationsArray=$event"
+                                (dataQueryURLtoApp)="dataQueryURL=$event" (dataQueryURLArraytoApp)="dataQueryURLArray=$event"></my-form>
+                            <my-data-query [queryURL]="dataQueryURL"></my-data-query><span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div>
+                    <h2 class="page-header">How to use this app:</h2>
+                    <ol>
+                        <li>On the left side bar, select your desired station from the first dropdown menu.</li>
+                        <li>Next, select your desired destination from the second dropdown menu.</li>
+                        <li>Press submit to see the information load below.</li>
+                        <li>Refresh the page to select a new station and destination.</li>
+                    </ol>
+                    <br>
+                </div>
+                <div>
+                    <h2 class="page-header">BART Map</h2 >
+                    <my-image (showMaptoApp)="hideDisplayApp=$event" [hideImage]="hideImageApp" [selectedStation]="imageStation" [selectedStationLatitude]="imageStationLatitude"
+                        [selectedStationLongitude]="imageStationLongitude"></my-image>
+                </div>
+                <br>
+                <my-table-query [hideTable]="hideDisplayApp" [selectedStationDestinations]="selectedStationDestinationsArray" [queryURLs]="dataQueryURLArray"></my-table-query> <span class="sr-only">(current)</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
